@@ -7,23 +7,28 @@
 
 from math import sqrt
 
-def is_prime(n):
-    if n == 1:
-        return False
-    for i in range(2, int(sqrt(n)+1)):
-        if n % i == 0:
+def is_prime(n, primes):
+    up_data = int(sqrt(n))
+    for prime in primes:
+        if prime > up_data:
+            break
+        if n % prime == 0:
             return False
     return True
 
 n = int(input())
+last_prime, next_prime = 2, 3
+count = 0
+primes = [2, 3]
+if n > 4:
+    for number in range(5, n+1):
+        if is_prime(number, primes):
+            primes.append(number)
+            last_prime = next_prime
+            next_prime = number
+            if next_prime - last_prime == 2:
+                count += 1 
 
-
-i = 0
-
-for num in range(2, n-1):
-    if is_prime(num) and is_prime(num+2):
-        i += 1
-
-print(i)
+print(count)
 
 

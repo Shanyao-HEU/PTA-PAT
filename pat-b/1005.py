@@ -6,28 +6,30 @@
 '''
 
 n = input()
-nums = set()
-outer = set()
-x = map(int, input().split())
-for i in x:
-    outer.add(i)
-    while i != 1:
-        if i in nums:
-            if i in outer:
-                outer.remove(i)
-            break
 
+temp = input().split()
+num = [int(i) for i in temp]
+rst = [int(i) for i in temp]
+
+numlist = []
+fin = []
+for i in range(len(num)):
+    while num[i] != 1:
+        if num[i] % 2==0:
+            num[i] = num[i] / 2
+            numlist.append(num[i])
+            
         else:
-            nums.add(i)
-
-        if i % 2 == 0:
-            i /= 2
-
-        else:
-            i = (i*3+1)/2
-
-s = [i for i in outer]
-res = ''
-for o in s[::-1]:
-    res = res + str(o) + ' '
-print(res[:-1])
+            num[i] = (num[i] * 3 + 1)/2
+            numlist.append(num[i])
+            
+for x in range(len(rst)):
+    if rst[x] not in numlist:
+        fin.append(rst[x])
+        
+fin.sort(reverse=True)
+a = []
+for f in fin:
+    a.append(str(int(f)))
+    
+print(' '.join(a))
